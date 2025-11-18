@@ -1,10 +1,11 @@
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scratchlet - Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Titan+One&amp;display极速飞艇=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet">
-     <link rel="shortcut icon" href="https://i.postimg.cc/Wbsrt82t/Scratchlet-Icon.png">
+    <link rel="shortcut icon" href="https://i.postimg.cc/Wbsrt82t/Scratchlet-Icon.png">
     <style>
         * {
             margin: 0;
@@ -301,19 +302,20 @@
             <div class="logo-text">Scratchlet</div>
         </div>
         <div class="nav-buttons">
-            <a href="https://scratchlet.github.io/stats/" class="nav-btn">📊 Stats</a>
-            <a href="https://scratchlet.github.io/market/" class="nav-btn"> 🛒 Market</a>
-            <a href="https://scratchlet.github.io/blooks/" class="nav-btn">😺 Blooks</a>
-            <a href="https://scratchlet.github.io/settings/" class="nav-btn">⚙️ Settings</a>
-            <a href="https://scratchlet.github.io/chat/" class="nav-btn">💬 Chat</a>
-            <a href="https://scratchlet.github.io/site/" class="nav-btn" style="background: rgba(255, 0, 0, 0.3); color: white;">🚪 Logout</a>
+
+            <a href="https://scratchlet.github.io/stats" class="nav-btn">📊 Stats</a>
+            <a href="https://scratchlet.github.io/market" class="nav-btn"> 🛒 Market</a>
+            <a href="https://scratchlet.github.io/blooks" class="nav-btn">😺 Blooks</a>
+            <a href="https://scratchlet.github.io/settings" class="nav-btn">⚙️ Settings</a>
+            <a href="https://scratchlet.github.io/chat" class="nav-btn">💬 Chat</a>
+            <a href="index.html" class="nav-btn" style="background: rgba(255, 0, 0, 0.3); color: white;">🚪 Logout</a>
         </div>
     </div>
 
     <div class="main-container">
         <div class="welcome-section">
             <h1 class="welcome-title">Welcome to Scratchlet!</h1>
-            <p class="welcome-subtitle">The ultimate Blooket remix experience</p>
+            <p class="welcome-subtitle">The Ultimate Blooket Remix Experience!</p>
             <div class="user-info">
                 <strong>Player:</strong> <span id="username">Guest</span> • 
                 <strong>Level:</strong> <span id="userLevel">15</span> • 
@@ -322,25 +324,25 @@
         </div>
 
         <div class="quick-nav">
-            <div class="nav-card" onclick="window.location.href='https://scratchlet.github.io/stats/">
+            <div class="nav-card" onclick="window.location.href='stats.html'">
                 <div class="nav-icon">📈</div>
                 <h3 class="nav-title">Statistics</h3>
-                <p class="nav-description">View your game stats and progress</p>
+                <p class="nav-description">View your game stats and progress!</p>
             </div>
             
-            <div class="nav-card" onclick="window.location.href='https://scratchlet.github.io/chat/'">
+            <div class="nav-card" onclick="window.location.href='chat.html'">
                 <div class="nav-icon">💬</div>
                 <h3 class="nav-title">Chat</h3>
-                <p class="nav-description">Talk and make new friends</p>
+                <p class="nav-description">Talk and make new friends!</p>
             </div>
             
-            <div class="nav-card" onclick="window.location.href='https://scratchlet.github.io/market/'">
+            <div class="nav-card" onclick="window.location.href='market.html'">
                 <div class="nav-icon">🛒</div>
                 <h3 class="nav-title">Market</h3>
                 <p class="nav-description">Buy packs and blooks!</p>
             </div>
-         
-             <div class="nav-card" onclick="window.location.href='https://scratchlet.github.io/blooks/'">
+
+             <div class="nav-card" onclick="window.location.href='blooks.html'">
                 <div class="nav-icon">😺</div>
                 <h3 class="nav-title">Blooks</h3>
                 <p class="nav-description">Sell and See all your Blooks here!</p>
@@ -400,6 +402,7 @@
     </div>
 
     <script>
+       // Load user data from localStorage
         document.addEventListener('DOMContentLoaded', function() {
             const username = localStorage.getItem('username') || 'Guest';
             const discord = localStorage.getItem('discord') || '';
@@ -408,10 +411,13 @@
             if (discord) {
                 document.getElementById('username').textContent += ` (${discord})`;
             }
+            
+            // Load mock stats (in real app, this would come from backend)
             loadUserStats();
         });
         
         function loadUserStats() {
+            // Mock user stats
             const mockStats = {
                 level: Math.floor(Math.random() * 50) + 1,
                 coins: Math.floor(Math.random() * 10000),
