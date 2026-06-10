@@ -1,486 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scratchlet - Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Titan+One&amp;display极速飞艇=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&amp;display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="https://i.postimg.cc/Wbsrt82t/Scratchlet-Icon.png">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: "Nunito", sans-serif;
-            background: 
-                linear-gradient(rgba(210, 180, 140, 0.15) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(210, 180, 140, 0.15) 1px, transparent 1px),
-                linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);
-            background-size: 40px 40px;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            color: white;
-        }
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            margin-bottom: 30px;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo-text {
-            font-family: "Titan One", sans-serif;
-            font-size: 2.5em;
-            color: #FFFFFF;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        .nav-buttons {
-            display: flex;
-            gap: 12px;
-        }
-        
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.9);
-            color: #FF8C00;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: "Nunito", sans-serif;
-            font-weight: 600;
-            font-size: 1em;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-        
-        .nav-btn:hover {
-            background: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-        }
-        
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .welcome-section {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .welcome-title {
-            font-family: "Titan One", sans-serif;
-            font-size: 3em;
-            color: #FFFFFF;
-            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-            margin-bottom: 10px;
-        }
-        
-        .welcome-subtitle {
-            font-size: 1.3em;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 20px;
-        }
-        
-        .user-info {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px 25px;
-            border-radius: 15px;
-            display: inline-block;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 40px 0;
-        }
-        
-        .game-card {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .game-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-        
-        .game-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-        
-        .game-title {
-            font-family: "Titan One", sans-serif;
-            font-size: 1.8em;
-            color: #FFFFFF;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            margin-bottom: 15px;
-        }
-        
-        .game-description {
-            color: rgba(255, 255, 255, 0.9);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        
-        .play-btn {
-            background: rgba(255, 255, 255, 0.9);
-            color: #FF8C00;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-family: "Nunito", sans-serif;
-            font-weight: 700;
-            font-size: 1.1em;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .play-btn:hover {
-            background: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .quick-nav {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-        
-        .nav-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .nav-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .nav-icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
-        }
-        
-        .nav-title {
-            font-family: "Titan One", sans-serif;
-            font-size: 1.4em;
-            color: #FFFFFF;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            margin-bottom: 10px;
-        }
-        
-        .nav-description {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9em;
-        }
-        
-        .stats-section {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            margin: 40px 0;
-        }
-        
-        .stats-title {
-            font-family: "Titan One", sans-serif;
-            font-size: 2em;
-            color: #FFFFFF;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .stat-number {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: #FF8C00;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-        
-        .stat-label {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9em;
-        }
-        
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-            
-            .nav-buttons {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .welcome-title {
-                font-size: 2.2em;
-            }
-            
-            .games-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .quick-nav {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scratchlet | Home</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Titan+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:"Nunito",sans-serif;color:white;min-height:100vh;
+background:linear-gradient(160deg,#fff4d6 0%,#ffc76a 25%,#ff9b2f 50%,#ff7f11 75%,#8f3200 100%);
+overflow-x:hidden;
+}
+.background{position:fixed;inset:0;z-index:-1;overflow:hidden}
+.square{position:absolute;border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);animation:fall linear infinite}
+@keyframes fall{from{transform:translateY(-120px)}to{transform:translateY(120vh) rotate(360deg)}}
+
+.navbar{height:70px;display:flex;justify-content:space-between;align-items:center;padding:0 30px;background:#ff7f11;box-shadow:inset 0 -6px rgba(0,0,0,.2)}
+.logo{font-family:"Titan One",cursive;font-size:2.5rem}
+.menu-btn{background:white;color:#ff7f11;border:none;padding:10px 16px;border-radius:12px;font-weight:900;cursor:pointer}
+.dropdown{display:none;position:absolute;top:75px;right:20px;background:#ff8c1a;border-radius:16px;padding:10px;box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:999}
+.dropdown a,.dropdown button{display:block;width:220px;padding:10px;color:white;text-decoration:none;background:none;border:none;text-align:left;font-weight:800;cursor:pointer}
+.dropdown.show{display:block}
+
+.container{max-width:1200px;margin:auto;padding:25px}
+.card{background:#ff8c1a;border-radius:16px;padding:25px;margin-bottom:20px;box-shadow:inset 0 -8px rgba(0,0,0,.18),0 10px 25px rgba(0,0,0,.2)}
+.card h2{font-family:"Titan One",cursive;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+.play-btn{display:inline-block;margin-top:10px;background:white;color:#ff7f11;padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:900}
+.verify{display:none}
+</style>
 </head>
+<body>
 
-<body style="background: linear-gradient(rgba(255, 128, 0, 0.15) 1px, transparent 1px) 0% 0% / 40px 40px, linear-gradient(90deg, rgba(255, 191, 0, 0.15) 1px, transparent 1px), linear-gradient(135deg, rgb(255, 128, 0) 0%, rgb(255, 191, 0) 100%);">
-    <div class="header">
-        <div class="logo">
-            <div class="logo-text">Scratchlet</div>
-        </div>
-        <div class="nav-buttons">
+<div class="background"></div>
 
-            <a href="https://scratchlet.github.io/stats" class="nav-btn">📊 Stats</a>
-            <a href="https://scratchlet.github.io/market" class="nav-btn"> 🛒 Market</a>
-            <a href="https://scratchlet.github.io/blooks" class="nav-btn">😺 Blooks</a>
-            <a href="https://scratchlet.github.io/settings" class="nav-btn">⚙️ Settings</a>
-            <a href="https://scratchlet.github.io/chat" class="nav-btn">💬 Chat</a>
-            <a href="index.html" class="nav-btn" style="background: rgba(255, 0, 0, 0.3); color: white;">🚪 Logout</a>
-        </div>
-    </div>
+<nav class="navbar">
+<div class="logo">Scratchlet</div>
+<div>
+<button class="menu-btn" id="menuBtn">☰ Menu</button>
+<div class="dropdown" id="menu">
+<a href="#">🏠 Home</a>
+<a href="https://google.com">🛒 Market</a>
+<a href="https://google.com">🎒 Inventory</a>
+<a href="https://google.com">📊 Stats</a>
+<a href="https://google.com">📰 News</a>
+<a href="https://google.com">📝 Posts</a>
+<a href="https://google.com">🎮 Play</a>
+<a href="https://google.com">💬 Chat</a>
+<a href="https://google.com">⚙️ Settings</a>
+<a href="https://google.com">🔄 Trading</a>
+<button id="logoutBtn">🚪 Logout</button>
+</div>
+</div>
+</nav>
 
-    <div class="main-container">
-        <div class="welcome-section">
-            <h1 class="welcome-title">Welcome to Scratchlet!</h1>
-            <p class="welcome-subtitle">The Ultimate Blooket Remix Experience!</p>
-            <div class="user-info">
-                <strong>Player:</strong> <span id="username">Guest</span> • 
-                <strong>Level:</strong> <span id="userLevel">15</span> • 
-                <strong>Coins:</strong> <span id="userCoins">9,541</span>
-            </div>
-        </div>
+<div class="container">
 
-        <div class="quick-nav">
-            <div class="nav-card" onclick="window.location.href='https://scratchlet.github.io/stats'">
-                <div class="nav-icon">📈</div>
-                <h3 class="nav-title">Statistics</h3>
-                <p class="nav-description">View your game stats and progress!</p>
-            </div>
-            
-            <div class="nav-card" onclick="window.location.href='https://scratchlet.github.io/chat'">
-                <div class="nav-icon">💬</div>
-                <h3 class="nav-title">Chat</h3>
-                <p class="nav-description">Talk and make new friends!</p>
-            </div>
-            
-            <div class="nav-card" onclick="window.location.href='https://scratchlet.github.io/market'">
-                <div class="nav-icon">🛒</div>
-                <h3 class="nav-title">Market</h3>
-                <p class="nav-description">Buy packs and blooks!</p>
-            </div>
+<div class="card verify" id="verifyCard">
+<h2>📩 Verify Your Email</h2>
+<p>Your email is not verified yet.</p>
+<button class="menu-btn" id="resendBtn">Resend Verification Email</button>
+</div>
 
-             <div class="nav-card" onclick="window.location.href='https://scratchlet.github.io/blooks'">
-                <div class="nav-icon">😺</div>
-                <h3 class="nav-title">Blooks</h3>
-                <p class="nav-description">Sell and See all your Blooks here!</p>
-            </div>
-        </div>
+<div class="card">
+<h2 id="welcome">👋 Welcome back!</h2>
+<p>Ready to play today?</p>
+</div>
 
-        <div class="stats-section">
-            <h2 class="stats-title">Quick Stats</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="gamesPlayed">306</div>
-                    <div class="stat-label">Games Played</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="totalScore">38,981</div>
-                    <div class="stat-label">Total Score</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="winRate">7%</div>
-                    <div class="stat-label">Win Rate</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="playTime">134h</div>
-                    <div class="stat-label">Play Time</div>
-                </div>
-            </div>
-        </div>
+<div class="grid">
+<div class="card">
+<h2>📰 Latest News</h2>
+<p><strong>Prebuild Version 1</strong></p>
+<p>This is a beta build, it may change in final.</p>
+</div>
 
-        <h2 class="welcome-title" style="font-size: 2.2em;">Game Modes</h2>
-        <div class="games-grid">
-            <div class="game-card">
-                <div class="game-icon">⚔️</div>
-                <h3 class="game-title">Battle Royale</h3>
-                <p class="game-description">Compete against other players in this fast-paced elimination game!</p>
-                <button class="play-btn">Play Now</button>
-            </div>
-            
-            <div class="game-card">
-                <div class="game-icon">💰</div>
-                <h3 class="game-title">Gold Quest</h3>
-                <p class="game-description">Collect gold and answer questions to win big rewards!</p>
-                <button class="play-btn">Play Now</button>
-            </div>
-            
-            <div class="game-card">
-                <div class="game-icon">🏭</div>
-                <h3 class="game-title">Factory</h3>
-                <p class="game-description">Manage your blook factory and maximize production efficiency!</p>
-                <button class="play-btn">Play Now</button>
-            </div>
-        </div>
+<div class="card">
+<h2>📝 Recent Posts</h2>
+<p><strong>testing posts</strong></p>
+<p>posted by unknown user</p>
+<p>testing</p>
+</div>
+</div>
 
-        <div class="footer">
-            <p>Scratchlet © 2024 • The Ultimate Blooket Remix Experience</p>
-            <p>Need help? Visit our <a href="scratchlet-official.neocities.org/support" style="color: #FF8C00; text-decoration: none;">Support Center</a></p>
-        </div>
-    </div>
+<div class="card">
+<h2>🎮 Play Now</h2>
+<p>Jump into Scratchlet.</p>
+<a class="play-btn" href="https://google.com">PLAY NOW</a>
+</div>
 
-    <script>
-       // Load user data from localStorage
-        document.addEventListener('DOMContentLoaded', function() {
-            const username = localStorage.getItem('username') || 'Guest';
-            const discord = localStorage.getItem('discord') || '';
-            
-            document.getElementById('username').textContent = username;
-            if (discord) {
-                document.getElementById('username').textContent += ` (${discord})`;
-            }
-            
-            // Load mock stats (in real app, this would come from backend)
-            loadUserStats();
-        });
-        
-        function loadUserStats() {
-            // Mock user stats
-            const mockStats = {
-                level: Math.floor(Math.random() * 50) + 1,
-                coins: Math.floor(Math.random() * 10000),
-                gamesPlayed: Math.floor(Math.random() * 500),
-                totalScore: Math.floor(Math.random() * 100000),
-                winRate: Math.floor(Math.random() * 100),
-                playTime: Math.floor(Math.random() * 200)
-            };
-            
-            document.getElementById('userLevel').textContent = mockStats.level;
-            document.getElementById('userCoins').textContent = mockStats.coins.toLocaleString();
-            document.getElementById('gamesPlayed').textContent = mockStats.gamesPlayed;
-            document.getElementById('totalScore').textContent = mockStats.totalScore.toLocaleString();
-            document.getElementById('winRate').textContent = mockStats.winRate + '%';
-            document.getElementById('playTime').textContent = mockStats.playTime + 'h';
-        }
-        
-        // Logout function
-        function logout() {
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('username');
-            localStorage.removeItem('discord');
-            localStorage.removeItem('userRole');
-            window.location.href = 'index.html';
-        }
-        
-        // Add logout functionality to the button
-        document.querySelector('[style*="background: rgba(255, 0, 0, 0.3);"]').addEventListener('click', function(e) {
-            e.preventDefault();
-            logout();
-        });
+<div class="card">
+<h2>🔄 Recent Trades</h2>
+<p>No trades.</p>
+</div>
 
-        // ---------- Utilities ----------
-function hslString(h,s,l){ return `hsl(${h},${s}%,${l}%)`; }
-function hslToRgb(h,s,l){
-  let a = s * Math.min(l,1-l);
-  const f = n => {
-    const k = (n + h/30) % 12;
-    const color = l - a * Math.max(Math.min(k-3, 9-k, 1), -1);
-    return Math.round(255 * color);
-  };
-  return [f(0), f(8), f(4)];
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getAuth,onAuthStateChanged,sendEmailVerification,signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import { getFirestore,doc,getDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const firebaseConfig={
+apiKey:"AIzaSyBzyszqkVPOn_Zbs0eacE1KQccYsTxul1E",
+authDomain:"scratchlet-ss.firebaseapp.com",
+projectId:"scratchlet-ss",
+storageBucket:"scratchlet-ss.firebasestorage.app",
+messagingSenderId:"265174756634",
+appId:"1:265174756634:web:a4c40ae00434f077e090a3",
+measurementId:"G-7B7B6VXYJX"
+};
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+
+onAuthStateChanged(auth, async(user)=>{
+ if(!user){
+   location.href="https://scratchlet.github.io/login/";
+   return;
+ }
+
+ await user.reload();
+
+ if(!user.emailVerified){
+   document.getElementById("verifyCard").style.display="block";
+ }
+
+ const snap=await getDoc(doc(db,"users",user.uid));
+ if(snap.exists()){
+   document.getElementById("welcome").innerText="👋 Welcome back, "+(snap.data().username||"User")+"!";
+ }
+});
+
+document.getElementById("resendBtn").onclick=async()=>{
+ if(auth.currentUser){
+   await sendEmailVerification(auth.currentUser);
+   alert("Verification email sent.");
+ }
+};
+
+document.getElementById("logoutBtn").onclick=async()=>{
+ await signOut(auth);
+ location.href="https://scratchlet.github.io/login/";
+};
+
+const menu=document.getElementById("menu");
+document.getElementById("menuBtn").onclick=()=>menu.classList.toggle("show");
+
+const bg=document.querySelector(".background");
+for(let i=0;i<60;i++){
+ const s=document.createElement("div");
+ s.className="square";
+ s.style.left=Math.random()*100+"%";
+ const size=Math.random()*25+10;
+ s.style.width=size+"px";
+ s.style.height=size+"px";
+ s.style.opacity=Math.random()*0.6+0.25;
+ s.style.animationDuration=(Math.random()*10+6)+"s";
+ bg.appendChild(s);
 }
-
-// ---------- Get applied colors from Settings ----------
-let appliedColors = JSON.parse(localStorage.getItem('appliedColors') || '{"primary":{"h":30,"s":100,"l":50},"secondary":{"h":45,"s":100,"l":50}}');
-
-// ---------- Apply background function ----------
-function applySettingsBackground(){
-  const p = appliedColors.primary;
-  const s = appliedColors.secondary;
-
-  const gridPrimary = `rgba(${hslToRgb(p.h,p.s/100,p.l/100).join(',')},0.15)`;
-  const gridSecondary = `rgba(${hslToRgb(s.h,s.s/100,s.l/100).join(',')},0.15)`;
-
-  const bg = `linear-gradient(${gridPrimary} 1px, transparent 1px),
-              linear-gradient(90deg, ${gridSecondary} 1px, transparent 1px),
-              linear-gradient(135deg, ${hslString(p.h,p.s,p.l)} 0%, ${hslString(s.h,s.s,s.l)} 100%)`;
-
-  document.body.style.background = bg;
-  document.body.style.backgroundSize = "40px 40px";
-}
-
-// ---------- Initialize ----------
-applySettingsBackground();
 </script>
 </body>
+</html>
