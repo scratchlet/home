@@ -12,16 +12,28 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
-font-family:"Nunito",sans-serif;color:white;min-height:100vh;
+font-family:"Nunito",sans-serif;
+color:white;
+min-height:100vh;
 background:linear-gradient(160deg,#fff4d6 0%,#ffc76a 25%,#ff9b2f 50%,#ff7f11 75%,#8f3200 100%);
 overflow-x:hidden;
 }
 
 /* BACKGROUND */
 .background{position:fixed;inset:0;z-index:-1;overflow:hidden}
-.square{position:absolute;border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);animation:fall linear infinite}
-@keyframes fall{from{transform:translateY(-120px)}to{transform:translateY(120vh) rotate(360deg)}}
+.square{
+position:absolute;
+border:2px solid rgba(255,255,255,.35);
+background:rgba(255,255,255,.12);
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+from{transform:translateY(-120px)}
+to{transform:translateY(120vh) rotate(360deg)}
+}
 
 /* NAVBAR */
 .navbar{
@@ -39,8 +51,7 @@ font-family:"Titan One",cursive;
 font-size:2.5rem;
 }
 
-/* ===== BUTTON SYSTEM (COPIED STYLE) ===== */
-
+/* ===== BUTTON SYSTEM (FIXED + RESTORED) ===== */
 .btn{
 font-family:"Nunito",sans-serif;
 font-weight:900;
@@ -72,14 +83,15 @@ color:white;
 border:2px solid rgba(255,255,255,.25);
 }
 
-.btn:hover{ transform: translateY(-2px); }
+.btn:hover{transform:translateY(-2px)}
 .btn:active{
-transform: translateY(4px);
+transform:translateY(4px);
 box-shadow:0 2px 0 rgba(0,0,0,.25);
 }
 
 /* LAYOUT */
 .container{max-width:1200px;margin:auto;padding:25px}
+
 .card{
 background:#ff8c1a;
 border-radius:16px;
@@ -98,7 +110,7 @@ gap:20px;
 
 .verify{display:none}
 
-/* MENU */
+/* ===== DROPDOWN FIXED ===== */
 .dropdown{
 display:none;
 position:absolute;
@@ -109,23 +121,18 @@ border-radius:16px;
 padding:10px;
 box-shadow:0 10px 25px rgba(0,0,0,.25);
 z-index:999;
+min-width:240px;
 }
 
 .dropdown.show{display:block}
 
-.dropdown a,
-.dropdown button{
-display:block;
-width:220px;
-padding:10px;
-color:white;
-text-decoration:none;
-background:none;
-border:none;
-text-align:left;
-font-weight:800;
-cursor:pointer;
+/* FIX: menu buttons now behave properly */
+.menu-item{
+width:100%;
+margin-bottom:8px;
 }
+
+.menu-item:last-child{margin-bottom:0}
 </style>
 </head>
 
@@ -140,13 +147,20 @@ cursor:pointer;
 <button class="btn secondary" id="menuBtn">☰ Menu</button>
 
 <div class="dropdown" id="menu">
-<a href="#" class="btn secondary">🏠 Home</a>
-<a href="https://google.com" class="btn secondary">🛒 Market</a>
-<a href="https://google.com" class="btn secondary">🎒 Inventory</a>
-<a href="https://google.com" class="btn secondary">📊 Stats</a>
-<a href="https://google.com" class="btn secondary">📰 News</a>
-<a href="https://google.com" class="btn secondary">🎮 Play</a>
-<button id="logoutBtn" class="btn primary">🚪 Logout</button>
+
+<a href="#" class="btn secondary menu-item">🏠 Home</a>
+<a href="https://google.com" class="btn secondary menu-item">🛒 Market</a>
+<a href="https://google.com" class="btn secondary menu-item">🎒 Inventory</a>
+<a href="https://google.com" class="btn secondary menu-item">📊 Stats</a>
+<a href="https://google.com" class="btn secondary menu-item">📰 News</a>
+<a href="https://google.com" class="btn secondary menu-item">📝 Posts</a>
+<a href="https://google.com" class="btn secondary menu-item">🎮 Play</a>
+<a href="https://google.com" class="btn secondary menu-item">💬 Chat</a>
+<a href="https://google.com" class="btn secondary menu-item">⚙️ Settings</a>
+<a href="https://google.com" class="btn secondary menu-item">🔄 Trading</a>
+
+<button id="logoutBtn" class="btn primary menu-item">🚪 Logout</button>
+
 </div>
 </div>
 </nav>
@@ -156,7 +170,7 @@ cursor:pointer;
 <div class="card verify" id="verifyCard">
 <h2>📩 Verify Your Email</h2>
 <p>Your email is not verified yet.</p>
-<button class="btn primary" id="resendBtn">Resend Email</button>
+<button class="btn primary" id="resendBtn">Resend Verification Email</button>
 </div>
 
 <div class="card">
@@ -165,20 +179,31 @@ cursor:pointer;
 </div>
 
 <div class="grid">
+
 <div class="card">
 <h2>📰 Latest News</h2>
 <p><strong>Prebuild Version 1</strong></p>
+<p>This is a beta build, it may change in final.</p>
 </div>
 
 <div class="card">
-<h2>📝 Posts</h2>
-<p>testing posts</p>
+<h2>📝 Recent Posts</h2>
+<p><strong>testing posts</strong></p>
+<p>posted by unknown user</p>
+<p>testing</p>
 </div>
+
 </div>
 
 <div class="card">
 <h2>🎮 Play Now</h2>
+<p>Jump into Scratchlet.</p>
 <a class="btn primary" href="https://google.com">PLAY NOW</a>
+</div>
+
+<div class="card">
+<h2>🔄 Recent Trades</h2>
+<p>No trades.</p>
 </div>
 
 </div>
@@ -202,7 +227,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-onAuthStateChanged(auth, async (user)=>{
+onAuthStateChanged(auth, async(user)=>{
 if(!user){
 location.href="https://scratchlet.github.io/login/";
 return;
@@ -214,7 +239,6 @@ document.getElementById("verifyCard").style.display =
 user.emailVerified ? "none" : "block";
 
 const snap = await getDoc(doc(db,"users",user.uid));
-
 if(snap.exists()){
 document.getElementById("welcome").innerText =
 "👋 Welcome back, " + (snap.data().username || "User") + "!";
@@ -224,7 +248,7 @@ document.getElementById("welcome").innerText =
 document.getElementById("resendBtn").onclick = async ()=>{
 if(auth.currentUser && !auth.currentUser.emailVerified){
 await sendEmailVerification(auth.currentUser);
-alert("Email sent!");
+alert("Verification email sent.");
 }
 };
 
@@ -234,14 +258,17 @@ location.href="https://scratchlet.github.io/login/";
 };
 
 const menu=document.getElementById("menu");
-document.getElementById("menuBtn").onclick=()=>menu.classList.toggle("show");
+document.getElementById("menuBtn").onclick=()=>{
+menu.classList.toggle("show");
+};
 
 const bg=document.querySelector(".background");
 for(let i=0;i<60;i++){
 const s=document.createElement("div");
 s.className="square";
 s.style.left=Math.random()*100+"%";
-s.style.width=s.style.height=(Math.random()*25+10)+"px";
+const size=Math.random()*25+10;
+s.style.width=s.style.height=size+"px";
 s.style.opacity=Math.random()*0.6+0.25;
 s.style.animationDuration=(Math.random()*10+6)+"s";
 bg.appendChild(s);
