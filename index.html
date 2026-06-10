@@ -17,23 +17,115 @@ font-family:"Nunito",sans-serif;color:white;min-height:100vh;
 background:linear-gradient(160deg,#fff4d6 0%,#ffc76a 25%,#ff9b2f 50%,#ff7f11 75%,#8f3200 100%);
 overflow-x:hidden;
 }
+
+/* BACKGROUND */
 .background{position:fixed;inset:0;z-index:-1;overflow:hidden}
 .square{position:absolute;border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);animation:fall linear infinite}
 @keyframes fall{from{transform:translateY(-120px)}to{transform:translateY(120vh) rotate(360deg)}}
 
-.navbar{height:70px;display:flex;justify-content:space-between;align-items:center;padding:0 30px;background:#ff7f11;box-shadow:inset 0 -6px rgba(0,0,0,.2)}
-.logo{font-family:"Titan One",cursive;font-size:2.5rem}
-.menu-btn{background:white;color:#ff7f11;border:none;padding:10px 16px;border-radius:12px;font-weight:900;cursor:pointer}
-.dropdown{display:none;position:absolute;top:75px;right:20px;background:#ff8c1a;border-radius:16px;padding:10px;box-shadow:0 10px 25px rgba(0,0,0,.25);z-index:999}
-.dropdown a,.dropdown button{display:block;width:220px;padding:10px;color:white;text-decoration:none;background:none;border:none;text-align:left;font-weight:800;cursor:pointer}
+/* NAVBAR */
+.navbar{
+height:70px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:0 30px;
+background:#ff7f11;
+box-shadow: inset 0 -6px rgba(0,0,0,.2);
+}
+
+.logo{
+font-family:"Titan One",cursive;
+font-size:2.5rem;
+}
+
+/* ===== BUTTON SYSTEM (COPIED STYLE) ===== */
+
+.btn{
+font-family:"Nunito",sans-serif;
+font-weight:900;
+border:none;
+cursor:pointer;
+letter-spacing:.3px;
+font-size:0.85rem;
+transition: transform .12s ease, box-shadow .12s ease;
+text-decoration:none;
+display:inline-block;
+}
+
+.primary,
+.secondary{
+padding:10px 18px;
+border-radius:14px;
+box-shadow:0 6px 0 rgba(0,0,0,.25);
+transform: translateY(0);
+}
+
+.primary{
+background:white;
+color:#ff8c1a;
+}
+
+.secondary{
+background:rgba(255,255,255,.18);
+color:white;
+border:2px solid rgba(255,255,255,.25);
+}
+
+.btn:hover{ transform: translateY(-2px); }
+.btn:active{
+transform: translateY(4px);
+box-shadow:0 2px 0 rgba(0,0,0,.25);
+}
+
+/* LAYOUT */
+.container{max-width:1200px;margin:auto;padding:25px}
+.card{
+background:#ff8c1a;
+border-radius:16px;
+padding:25px;
+margin-bottom:20px;
+box-shadow:inset 0 -8px rgba(0,0,0,.18),0 10px 25px rgba(0,0,0,.2);
+}
+
+.card h2{font-family:"Titan One",cursive;margin-bottom:10px}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:20px;
+}
+
+.verify{display:none}
+
+/* MENU */
+.dropdown{
+display:none;
+position:absolute;
+top:75px;
+right:20px;
+background:#ff8c1a;
+border-radius:16px;
+padding:10px;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+z-index:999;
+}
+
 .dropdown.show{display:block}
 
-.container{max-width:1200px;margin:auto;padding:25px}
-.card{background:#ff8c1a;border-radius:16px;padding:25px;margin-bottom:20px;box-shadow:inset 0 -8px rgba(0,0,0,.18),0 10px 25px rgba(0,0,0,.2)}
-.card h2{font-family:"Titan One",cursive;margin-bottom:10px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
-.play-btn{display:inline-block;margin-top:10px;background:white;color:#ff7f11;padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:900}
-.verify{display:none}
+.dropdown a,
+.dropdown button{
+display:block;
+width:220px;
+padding:10px;
+color:white;
+text-decoration:none;
+background:none;
+border:none;
+text-align:left;
+font-weight:800;
+cursor:pointer;
+}
 </style>
 </head>
 
@@ -43,20 +135,18 @@ overflow-x:hidden;
 
 <nav class="navbar">
 <div class="logo">Scratchlet</div>
+
 <div>
-<button class="menu-btn" id="menuBtn">☰ Menu</button>
+<button class="btn secondary" id="menuBtn">☰ Menu</button>
+
 <div class="dropdown" id="menu">
-<a href="#">🏠 Home</a>
-<a href="https://google.com">🛒 Market</a>
-<a href="https://google.com">🎒 Inventory</a>
-<a href="https://google.com">📊 Stats</a>
-<a href="https://google.com">📰 News</a>
-<a href="https://google.com">📝 Posts</a>
-<a href="https://google.com">🎮 Play</a>
-<a href="https://google.com">💬 Chat</a>
-<a href="https://google.com">⚙️ Settings</a>
-<a href="https://google.com">🔄 Trading</a>
-<button id="logoutBtn">🚪 Logout</button>
+<a href="#" class="btn secondary">🏠 Home</a>
+<a href="https://google.com" class="btn secondary">🛒 Market</a>
+<a href="https://google.com" class="btn secondary">🎒 Inventory</a>
+<a href="https://google.com" class="btn secondary">📊 Stats</a>
+<a href="https://google.com" class="btn secondary">📰 News</a>
+<a href="https://google.com" class="btn secondary">🎮 Play</a>
+<button id="logoutBtn" class="btn primary">🚪 Logout</button>
 </div>
 </div>
 </nav>
@@ -66,7 +156,7 @@ overflow-x:hidden;
 <div class="card verify" id="verifyCard">
 <h2>📩 Verify Your Email</h2>
 <p>Your email is not verified yet.</p>
-<button class="menu-btn" id="resendBtn">Resend Verification Email</button>
+<button class="btn primary" id="resendBtn">Resend Email</button>
 </div>
 
 <div class="card">
@@ -78,26 +168,17 @@ overflow-x:hidden;
 <div class="card">
 <h2>📰 Latest News</h2>
 <p><strong>Prebuild Version 1</strong></p>
-<p>This is a beta build, it may change in final.</p>
 </div>
 
 <div class="card">
-<h2>📝 Recent Posts</h2>
-<p><strong>testing posts</strong></p>
-<p>posted by unknown user</p>
-<p>testing</p>
+<h2>📝 Posts</h2>
+<p>testing posts</p>
 </div>
 </div>
 
 <div class="card">
 <h2>🎮 Play Now</h2>
-<p>Jump into Scratchlet.</p>
-<a class="play-btn" href="https://google.com">PLAY NOW</a>
-</div>
-
-<div class="card">
-<h2>🔄 Recent Trades</h2>
-<p>No trades.</p>
+<a class="btn primary" href="https://google.com">PLAY NOW</a>
 </div>
 
 </div>
@@ -121,58 +202,48 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-onAuthStateChanged(auth, async (user) => {
-if (!user) {
-location.href = "https://scratchlet.github.io/login/";
+onAuthStateChanged(auth, async (user)=>{
+if(!user){
+location.href="https://scratchlet.github.io/login/";
 return;
 }
 
 await user.reload();
 
-const verifyCard = document.getElementById("verifyCard");
+document.getElementById("verifyCard").style.display =
+user.emailVerified ? "none" : "block";
 
-if (!user.emailVerified) {
-verifyCard.style.display = "block";
-} else {
-verifyCard.style.display = "none";
-}
+const snap = await getDoc(doc(db,"users",user.uid));
 
-const snap = await getDoc(doc(db, "users", user.uid));
-
-if (snap.exists()) {
-const data = snap.data();
+if(snap.exists()){
 document.getElementById("welcome").innerText =
-"👋 Welcome back, " + (data.username || "User") + "!";
+"👋 Welcome back, " + (snap.data().username || "User") + "!";
 }
 });
 
-document.getElementById("resendBtn").onclick = async () => {
-if (auth.currentUser && !auth.currentUser.emailVerified) {
+document.getElementById("resendBtn").onclick = async ()=>{
+if(auth.currentUser && !auth.currentUser.emailVerified){
 await sendEmailVerification(auth.currentUser);
-alert("Verification email sent.");
+alert("Email sent!");
 }
 };
 
-document.getElementById("logoutBtn").onclick = async () => {
+document.getElementById("logoutBtn").onclick = async ()=>{
 await signOut(auth);
-location.href = "https://scratchlet.github.io/login/";
+location.href="https://scratchlet.github.io/login/";
 };
 
-const menu = document.getElementById("menu");
-document.getElementById("menuBtn").onclick = () =>
-menu.classList.toggle("show");
+const menu=document.getElementById("menu");
+document.getElementById("menuBtn").onclick=()=>menu.classList.toggle("show");
 
-const bg = document.querySelector(".background");
-
-for (let i = 0; i < 60; i++) {
-const s = document.createElement("div");
-s.className = "square";
-s.style.left = Math.random() * 100 + "%";
-const size = Math.random() * 25 + 10;
-s.style.width = size + "px";
-s.style.height = size + "px";
-s.style.opacity = Math.random() * 0.6 + 0.25;
-s.style.animationDuration = (Math.random() * 10 + 6) + "s";
+const bg=document.querySelector(".background");
+for(let i=0;i<60;i++){
+const s=document.createElement("div");
+s.className="square";
+s.style.left=Math.random()*100+"%";
+s.style.width=s.style.height=(Math.random()*25+10)+"px";
+s.style.opacity=Math.random()*0.6+0.25;
+s.style.animationDuration=(Math.random()*10+6)+"s";
 bg.appendChild(s);
 }
 </script>
