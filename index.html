@@ -7,6 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Titan+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -51,7 +52,9 @@ font-family:"Titan One",cursive;
 font-size:2.5rem;
 }
 
-/* ===== BUTTON SYSTEM (FIXED + RESTORED) ===== */
+/* =========================
+   BUTTON SYSTEM
+========================= */
 .btn{
 font-family:"Nunito",sans-serif;
 font-weight:900;
@@ -89,6 +92,70 @@ transform:translateY(4px);
 box-shadow:0 2px 0 rgba(0,0,0,.25);
 }
 
+/* =========================
+   SIDEBAR MENU
+========================= */
+
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.4);
+opacity:0;
+pointer-events:none;
+transition:.25s ease;
+z-index:998;
+}
+
+.overlay.show{
+opacity:1;
+pointer-events:auto;
+}
+
+.sidebar{
+position:fixed;
+top:0;
+right:-320px;
+width:300px;
+height:100vh;
+background:#ff8c1a;
+box-shadow:-10px 0 25px rgba(0,0,0,.25);
+padding:20px;
+display:flex;
+flex-direction:column;
+gap:10px;
+transition:.3s ease;
+z-index:999;
+}
+
+.sidebar.open{
+right:0;
+}
+
+.sidebar-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+}
+
+.sidebar-header h2{
+font-family:"Titan One",cursive;
+}
+
+/* MENU ITEMS */
+.menu-item{
+display:flex;
+align-items:center;
+gap:10px;
+justify-content:flex-start;
+text-align:left;
+width:100%;
+}
+
+.menu-item .material-icons{
+font-size:22px;
+}
+
 /* LAYOUT */
 .container{max-width:1200px;margin:auto;padding:25px}
 
@@ -109,30 +176,6 @@ gap:20px;
 }
 
 .verify{display:none}
-
-/* ===== DROPDOWN FIXED ===== */
-.dropdown{
-display:none;
-position:absolute;
-top:75px;
-right:20px;
-background:#ff8c1a;
-border-radius:16px;
-padding:10px;
-box-shadow:0 10px 25px rgba(0,0,0,.25);
-z-index:999;
-min-width:240px;
-}
-
-.dropdown.show{display:block}
-
-/* FIX: menu buttons now behave properly */
-.menu-item{
-width:100%;
-margin-bottom:8px;
-}
-
-.menu-item:last-child{margin-bottom:0}
 </style>
 </head>
 
@@ -140,69 +183,110 @@ margin-bottom:8px;
 
 <div class="background"></div>
 
+<!-- OVERLAY -->
+<div class="overlay" id="overlay"></div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="menu">
+
+<div class="sidebar-header">
+<h2>Menu</h2>
+<button class="btn secondary" id="closeMenu">
+<span class="material-icons">close</span>
+</button>
+</div>
+
+<a href="#" class="btn secondary menu-item">
+<span class="material-icons">home</span> Home
+</a>
+
+<a href="https://google.com" class="btn secondary menu-item">
+<span class="material-icons">store</span> Market
+</a>
+
+<a href="https://google.com" class="btn secondary menu-item">
+<span class="material-icons">inventory_2</span> Inventory
+</a>
+
+<a href="https://google.com" class="btn secondary menu-item">
+<span class="material-icons">bar_chart</span> Stats
+</a>
+
+<a href="https://google.com" class="btn secondary menu-item">
+<span class="material-icons">article</span> News
+</a>
+
+<a href="https://google.com" class="btn secondary menu-item">
+<span class="material-icons">post_add</span> Posts
+</a>
+
+<a href="https://google.com" class="btn secondary menu-item">
+<span class="material-icons">sports_esports</span> Play
+</a>
+
+<a href="https://google.com" class="btn secondary menu-item">
+<span class="material-icons">chat</span> Chat
+</a>
+
+<a href="https://google.com" class="btn secondary menu-item">
+<span class="material-icons">settings</span> Settings
+</a>
+
+<a href="https://google.com" class="btn secondary menu-item">
+<span class="material-icons">swap_horiz</span> Trading
+</a>
+
+<button id="logoutBtn" class="btn primary menu-item">
+<span class="material-icons">logout</span> Logout
+</button>
+
+</div>
+
+<!-- NAVBAR -->
 <nav class="navbar">
 <div class="logo">Scratchlet</div>
 
-<div>
-<button class="btn secondary" id="menuBtn">☰ Menu</button>
-
-<div class="dropdown" id="menu">
-
-<a href="#" class="btn secondary menu-item">🏠 Home</a>
-<a href="https://google.com" class="btn secondary menu-item">🛒 Market</a>
-<a href="https://google.com" class="btn secondary menu-item">🎒 Inventory</a>
-<a href="https://google.com" class="btn secondary menu-item">📊 Stats</a>
-<a href="https://google.com" class="btn secondary menu-item">📰 News</a>
-<a href="https://google.com" class="btn secondary menu-item">📝 Posts</a>
-<a href="https://google.com" class="btn secondary menu-item">🎮 Play</a>
-<a href="https://google.com" class="btn secondary menu-item">💬 Chat</a>
-<a href="https://google.com" class="btn secondary menu-item">⚙️ Settings</a>
-<a href="https://google.com" class="btn secondary menu-item">🔄 Trading</a>
-
-<button id="logoutBtn" class="btn primary menu-item">🚪 Logout</button>
-
-</div>
-</div>
+<button class="btn secondary" id="menuBtn">
+<span class="material-icons">menu</span>
+Menu
+</button>
 </nav>
 
 <div class="container">
 
 <div class="card verify" id="verifyCard">
-<h2>📩 Verify Your Email</h2>
+<h2>Verify Your Email</h2>
 <p>Your email is not verified yet.</p>
-<button class="btn primary" id="resendBtn">Resend Verification Email</button>
+<button class="btn primary" id="resendBtn">Resend Email</button>
 </div>
 
 <div class="card">
-<h2 id="welcome">👋 Welcome back!</h2>
+<h2 id="welcome">Welcome back!</h2>
 <p>Ready to play today?</p>
 </div>
 
 <div class="grid">
 
 <div class="card">
-<h2>📰 Latest News</h2>
+<h2>Latest News</h2>
 <p><strong>Prebuild Version 1</strong></p>
-<p>This is a beta build, it may change in final.</p>
+<p>This is a beta build.</p>
 </div>
 
 <div class="card">
-<h2>📝 Recent Posts</h2>
-<p><strong>testing posts</strong></p>
-<p>posted by unknown user</p>
-<p>testing</p>
+<h2>Recent Posts</h2>
+<p>testing posts</p>
 </div>
 
 </div>
 
 <div class="card">
-<h2>🎮 Play Now</h2>
-<p>Jump into Scratchlet.</p>
+<h2>Play Now</h2>
 <a class="btn primary" href="https://google.com">PLAY NOW</a>
 </div>
 
 <div class="card">
-<h2>🔄 Recent Trades</h2>
+<h2>Recent Trades</h2>
 <p>No trades.</p>
 </div>
 
@@ -227,6 +311,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+/* AUTH */
 onAuthStateChanged(auth, async(user)=>{
 if(!user){
 location.href="https://scratchlet.github.io/login/";
@@ -241,27 +326,42 @@ user.emailVerified ? "none" : "block";
 const snap = await getDoc(doc(db,"users",user.uid));
 if(snap.exists()){
 document.getElementById("welcome").innerText =
-"👋 Welcome back, " + (snap.data().username || "User") + "!";
+"Welcome back, " + (snap.data().username || "User") + "!";
 }
 });
 
+/* EMAIL VERIFY */
 document.getElementById("resendBtn").onclick = async ()=>{
 if(auth.currentUser && !auth.currentUser.emailVerified){
 await sendEmailVerification(auth.currentUser);
-alert("Verification email sent.");
+alert("Email sent!");
 }
 };
 
+/* LOGOUT */
 document.getElementById("logoutBtn").onclick = async ()=>{
 await signOut(auth);
 location.href="https://scratchlet.github.io/login/";
 };
 
+/* SIDEBAR */
 const menu=document.getElementById("menu");
+const overlay=document.getElementById("overlay");
+
 document.getElementById("menuBtn").onclick=()=>{
-menu.classList.toggle("show");
+menu.classList.add("open");
+overlay.classList.add("show");
 };
 
+document.getElementById("closeMenu").onclick=closeMenu;
+overlay.onclick=closeMenu;
+
+function closeMenu(){
+menu.classList.remove("open");
+overlay.classList.remove("show");
+}
+
+/* BACKGROUND */
 const bg=document.querySelector(".background");
 for(let i=0;i<60;i++){
 const s=document.createElement("div");
