@@ -175,7 +175,6 @@ grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
 gap:20px;
 }
 
-.verify{display:none}
 </style>
 </head>
 
@@ -254,17 +253,6 @@ gap:20px;
 
 <div class="container">
 
-<div class="card verify" id="verifyCard">
-<h2>Verify Your Email</h2>
-<p>Your email is not verified yet.</p>
-<button class="btn primary" id="resendBtn">Resend Email</button>
-</div>
-
-<div class="card">
-<h2 id="welcome">Welcome back!</h2>
-<p>Ready to play today?</p>
-</div>
-
 <div class="grid">
 
 <div class="card">
@@ -297,14 +285,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/fireba
 import {
   getAuth,
   onAuthStateChanged,
-  sendEmailVerification,
   signOut
 } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-import {
-  getFirestore,
-  doc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBzyszqkVPOn_Zbs0eacE1KQccYsTxul1E",
@@ -318,98 +300,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 
-/* =========================
-   EMAIL VERIFICATION
-========================= */
-
-async function checkVerification() {
-  const user = auth.currentUser;
-
-  if (!user) return;
-
-  try {
-    await user.reload();
-
-    if (user.emailVerified) {
-      document.getElementById("verifyCard").style.display = "none";
-    } else {
-      document.getElementById("verifyCard").style.display = "block";
-    }
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-/* =========================
-   AUTH
-========================= */
-
-onAuthStateChanged(auth, async (user) => {
+/* AUTH */
+onAuthStateChanged(auth, (user) => {
   if (!user) {
     location.href = "https://scratchlet.github.io/login/";
-    return;
-  }
-
-  await checkVerification();
-
-  try {
-    const snap = await getDoc(doc(db, "users", user.uid));
-
-    if (snap.exists()) {
-      document.getElementById("welcome").innerText =
-        "Welcome back, " +
-        (snap.data().username || "User") +
-        "!";
-    }
-  } catch (err) {
-    console.error(err);
   }
 });
 
-/* =========================
-   AUTO CHECK VERIFICATION
-========================= */
-
-setInterval(async () => {
-  if (auth.currentUser) {
-    await checkVerification();
-  }
-}, 5000);
-
-/* =========================
-   RESEND EMAIL
-========================= */
-
-document.getElementById("resendBtn").onclick = async () => {
-  const user = auth.currentUser;
-
-  if (!user) return;
-
-  if (user.emailVerified) {
-    alert("Your email is already verified.");
-    return;
-  }
-
-  try {
-    await sendEmailVerification(user);
-
-    alert(
-      "Verification email sent! After clicking the link in your email, this page will automatically update."
-    );
-
-    await checkVerification();
-  } catch (err) {
-    console.error(err);
-    alert(err.message);
-  }
-};
-
-/* =========================
-   LOGOUT
-========================= */
-
+/* LOGOUT */
 document.getElementById("logoutBtn").onclick = async () => {
   try {
     await signOut(auth);
@@ -419,10 +318,7 @@ document.getElementById("logoutBtn").onclick = async () => {
   }
 };
 
-/* =========================
-   SIDEBAR
-========================= */
-
+/* SIDEBAR */
 const menu = document.getElementById("menu");
 const overlay = document.getElementById("overlay");
 
@@ -439,10 +335,7 @@ function closeMenu() {
   overlay.classList.remove("show");
 }
 
-/* =========================
-   BACKGROUND ANIMATION
-========================= */
-
+/* BACKGROUND */
 const bg = document.querySelector(".background");
 
 for (let i = 0; i < 60; i++) {
@@ -452,12 +345,11 @@ for (let i = 0; i < 60; i++) {
   s.style.left = Math.random() * 100 + "%";
 
   const size = Math.random() * 25 + 10;
-
   s.style.width = size + "px";
   s.style.height = size + "px";
 
   s.style.opacity = Math.random() * 0.6 + 0.25;
-  s.style.animationDuration = Math.random() * 10 + 6 + "s";
+  s.style.animationDuration = (Math.random() * 10 + 6) + "s";
 
   bg.appendChild(s);
 }
