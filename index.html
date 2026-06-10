@@ -294,86 +294,173 @@ gap:20px;
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import { getAuth, onAuthStateChanged, sendEmailVerification, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  sendEmailVerification,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey:"AIzaSyBzyszqkVPOn_Zbs0eacE1KQccYsTxul1E",
-authDomain:"scratchlet-ss.firebaseapp.com",
-projectId:"scratchlet-ss",
-storageBucket:"scratchlet-ss.firebasestorage.app",
-messagingSenderId:"265174756634",
-appId:"1:265174756634:web:a4c40ae00434f077e090a3",
-measurementId:"G-7B7B6VXYJX"
+  apiKey: "AIzaSyBzyszqkVPOn_Zbs0eacE1KQccYsTxul1E",
+  authDomain: "scratchlet-ss.firebaseapp.com",
+  projectId: "scratchlet-ss",
+  storageBucket: "scratchlet-ss.firebasestorage.app",
+  messagingSenderId: "265174756634",
+  appId: "1:265174756634:web:a4c40ae00434f077e090a3",
+  measurementId: "G-7B7B6VXYJX"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-/* AUTH */
-onAuthStateChanged(auth, async(user)=>{
-if(!user){
-location.href="https://scratchlet.github.io/login/";
-return;
+/* =========================
+   EMAIL VERIFICATION
+========================= */
+
+async function checkVerification() {
+  const user = auth.currentUser;
+
+  if (!user) return;
+
+  try {
+    await user.reload();
+
+    if (user.emailVerified) {
+      document.getElementById("verifyCard").style.display = "none";
+    } else {
+      document.getElementById("verifyCard").style.display = "block";
+    }
+  } catch (err) {
+    console.error(err);
+  }
 }
 
-await user.reload();
+/* =========================
+   AUTH
+========================= */
 
-document.getElementById("verifyCard").style.display =
-user.emailVerified ? "none" : "block";
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    location.href = "https://scratchlet.github.io/login/";
+    return;
+  }
 
-const snap = await getDoc(doc(db,"users",user.uid));
-if(snap.exists()){
-document.getElementById("welcome").innerText =
-"Welcome back, " + (snap.data().username || "User") + "!";
-}
+  await checkVerification();
+
+  try {
+    const snap = await getDoc(doc(db, "users", user.uid));
+
+    if (snap.exists()) {
+      document.getElementById("welcome").innerText =
+        "Welcome back, " +
+        (snap.data().username || "User") +
+        "!";
+    }
+  } catch (err) {
+    console.error(err);
+  }
 });
 
-/* EMAIL VERIFY */
-document.getElementById("resendBtn").onclick = async ()=>{
-if(auth.currentUser && !auth.currentUser.emailVerified){
-await sendEmailVerification(auth.currentUser);
-alert("Email sent!");
+/* =========================
+   AUTO CHECK VERIFICATION
+========================= */
+
+setInterval(async () => {
+  if (auth.currentUser) {
+    await checkVerification();
+  }
+}, 5000);
+
+/* =========================
+   RESEND EMAIL
+========================= */
+
+document.getElementById("resendBtn").onclick = async () => {
+  const user = auth.currentUser;
+
+  if (!user) return;
+
+  if (user.emailVerified) {
+    alert("Your email is already verified.");
+    return;
+  }
+
+  try {
+    await sendEmailVerification(user);
+
+    alert(
+      "Verification email sent! After clicking the link in your email, this page will automatically update."
+    );
+
+    await checkVerification();
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+};
+
+/* =========================
+   LOGOUT
+========================= */
+
+document.getElementById("logoutBtn").onclick = async () => {
+  try {
+    await signOut(auth);
+    location.href = "https://scratchlet.github.io/login/";
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+/* =========================
+   SIDEBAR
+========================= */
+
+const menu = document.getElementById("menu");
+const overlay = document.getElementById("overlay");
+
+document.getElementById("menuBtn").onclick = () => {
+  menu.classList.add("open");
+  overlay.classList.add("show");
+};
+
+document.getElementById("closeMenu").onclick = closeMenu;
+overlay.onclick = closeMenu;
+
+function closeMenu() {
+  menu.classList.remove("open");
+  overlay.classList.remove("show");
 }
-};
 
-/* LOGOUT */
-document.getElementById("logoutBtn").onclick = async ()=>{
-await signOut(auth);
-location.href="https://scratchlet.github.io/login/";
-};
+/* =========================
+   BACKGROUND ANIMATION
+========================= */
 
-/* SIDEBAR */
-const menu=document.getElementById("menu");
-const overlay=document.getElementById("overlay");
+const bg = document.querySelector(".background");
 
-document.getElementById("menuBtn").onclick=()=>{
-menu.classList.add("open");
-overlay.classList.add("show");
-};
+for (let i = 0; i < 60; i++) {
+  const s = document.createElement("div");
 
-document.getElementById("closeMenu").onclick=closeMenu;
-overlay.onclick=closeMenu;
+  s.className = "square";
+  s.style.left = Math.random() * 100 + "%";
 
-function closeMenu(){
-menu.classList.remove("open");
-overlay.classList.remove("show");
-}
+  const size = Math.random() * 25 + 10;
 
-/* BACKGROUND */
-const bg=document.querySelector(".background");
-for(let i=0;i<60;i++){
-const s=document.createElement("div");
-s.className="square";
-s.style.left=Math.random()*100+"%";
-const size=Math.random()*25+10;
-s.style.width=s.style.height=size+"px";
-s.style.opacity=Math.random()*0.6+0.25;
-s.style.animationDuration=(Math.random()*10+6)+"s";
-bg.appendChild(s);
+  s.style.width = size + "px";
+  s.style.height = size + "px";
+
+  s.style.opacity = Math.random() * 0.6 + 0.25;
+  s.style.animationDuration = Math.random() * 10 + 6 + "s";
+
+  bg.appendChild(s);
 }
 </script>
-
 </body>
 </html>
