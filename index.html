@@ -4,298 +4,126 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Scratchlet | Home</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Titan+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght=400;600;700;800;900&family=Titan+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
-body{
-font-family:"Nunito",sans-serif;
-color:white;
-min-height:100vh;
-background:linear-gradient(160deg,#fff4d6 0%,#ffc76a 25%,#ff9b2f 50%,#ff7f11 75%,#8f3200 100%);
-overflow-x:hidden;
-}
+body{font-family:"Nunito",sans-serif;color:white;min-height:100vh;background:linear-gradient(160deg,#fff4d6 0%,#ffc76a 25%,#ff9b2f 50%,#ff7f11 75%,#8f3200 100%);overflow-x:hidden;}
 
 /* BACKGROUND */
-.background{position:fixed;inset:0;z-index:-1;overflow:hidden}
-.square{
-position:absolute;
-border:2px solid rgba(255,255,255,.35);
-background:rgba(255,255,255,.12);
-animation:fall linear infinite;
+.background{position:fixed;inset:0;z-index:-1;overflow:hidden}.square{position:absolute;border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);animation:fall linear infinite;}
+@keyframes fall{from{transform:translateY(-120px)}to{transform:translateY(120vh) rotate(360deg)}}
+
+/* NAVBAR & MINIBAR */
+.navbar{height:70px;display:flex;justify-content:space-between;align-items:center;padding:0 30px;background:#ff7f11;box-shadow: inset 0 -6px rgba(0,0,0,.2);}
+.logo{font-family:"Titan One",cursive;font-size:2.5rem;flex-shrink:0;}
+.minibar{display:flex;align-items:center;gap:8px;}
+
+/* =========================   BUTTON SYSTEM ========================= */
+.btn{font-family:"Nunito",sans-serif;font-weight:900;border:none;cursor:pointer;letter-spacing:.3px;font-size:0.85rem;transition: transform .12s ease, box-shadow .12s ease;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;position:relative;}
+.primary,.secondary{padding:10px 18px;border-radius:14px;box-shadow:0 6px 0 rgba(0,0,0,.25);transform: translateY(0);}
+.primary{background:white;color:#ff8c1a;}
+.secondary{background:rgba(255,255,255,.18);color:white;border:2px solid rgba(255,255,255,.25);}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.25);}
+
+/* MINIBAR ICON BUTTONS */
+.minibar-btn{width:42px;height:42px;padding:0;border-radius:12px;box-shadow:0 4px 0 rgba(0,0,0,.25);}
+.minibar-btn:active{box-shadow:0 1px 0 rgba(0,0,0,.25);}
+.minibar-btn .material-icons{font-size:22px;}
+
+/* ========================= INFO BUBBLE TOOLTIPS ========================= */
+.minibar-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 55px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-5px) scale(0.9);
+  background: #8f3200;
+  color: #fff4d6;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.15s ease;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  border: 2px solid rgba(255,255,255,0.15);
 }
 
-@keyframes fall{
-from{transform:translateY(-120px)}
-to{transform:translateY(120vh) rotate(360deg)}
+/* The little triangle arrow pointer on top of the bubble */
+.minibar-btn::before {
+  content: '';
+  position: absolute;
+  top: 49px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-5px);
+  border-width: 0 6px 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent #8f3200 transparent;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.15s ease;
+  z-index: 101;
 }
 
-/* NAVBAR */
-.navbar{
-height:70px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:0 30px;
-background:#ff7f11;
-box-shadow: inset 0 -6px rgba(0,0,0,.2);
-}
-
-.logo{
-font-family:"Titan One",cursive;
-font-size:2.5rem;
-}
-
-/* =========================
-   BUTTON SYSTEM
-========================= */
-.btn{
-font-family:"Nunito",sans-serif;
-font-weight:900;
-border:none;
-cursor:pointer;
-letter-spacing:.3px;
-font-size:0.85rem;
-transition: transform .12s ease, box-shadow .12s ease;
-text-decoration:none;
-display:inline-block;
-}
-
-.primary,
-.secondary{
-padding:10px 18px;
-border-radius:14px;
-box-shadow:0 6px 0 rgba(0,0,0,.25);
-transform: translateY(0);
-}
-
-.primary{
-background:white;
-color:#ff8c1a;
-}
-
-.secondary{
-background:rgba(255,255,255,.18);
-color:white;
-border:2px solid rgba(255,255,255,.25);
-}
-
-.btn:hover{transform:translateY(-2px)}
-.btn:active{
-transform:translateY(4px);
-box-shadow:0 2px 0 rgba(0,0,0,.25);
-}
-
-/* =========================
-   SIDEBAR MENU
-========================= */
-
-.overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.4);
-opacity:0;
-pointer-events:none;
-transition:.25s ease;
-z-index:998;
-}
-
-.overlay.show{
-opacity:1;
-pointer-events:auto;
-}
-
-.sidebar{
-position:fixed;
-top:0;
-right:-320px;
-width:300px;
-height:100vh;
-background:#ff8c1a;
-box-shadow:-10px 0 25px rgba(0,0,0,.25);
-padding:20px;
-display:flex;
-flex-direction:column;
-gap:10px;
-transition:.3s ease;
-z-index:999;
-}
-
-.sidebar.open{
-right:0;
-}
-
-.sidebar-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:10px;
-}
-
-.sidebar-header h2{
-font-family:"Titan One",cursive;
-}
-
-/* MENU ITEMS */
-.menu-item{
-display:flex;
-align-items:center;
-gap:10px;
-justify-content:flex-start;
-text-align:left;
-width:100%;
-}
-
-.menu-item .material-icons{
-font-size:22px;
+.minibar-btn:hover::after, .minibar-btn:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
 }
 
 /* LAYOUT */
 .container{max-width:1200px;margin:auto;padding:25px}
-
-.card{
-background:#ff8c1a;
-border-radius:16px;
-padding:25px;
-margin-bottom:20px;
-box-shadow:inset 0 -8px rgba(0,0,0,.18),0 10px 25px rgba(0,0,0,.2);
-}
-
+.card{background:#ff8c1a;border-radius:16px;padding:25px;margin-bottom:20px;box-shadow:inset 0 -8px rgba(0,0,0,.18),0 10px 25px rgba(0,0,0,.2);}
 .card h2{font-family:"Titan One",cursive;margin-bottom:10px}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:20px;
-}
-
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;}
 </style>
 </head>
-
 <body>
 
 <div class="background"></div>
 
-<!-- OVERLAY -->
-<div class="overlay" id="overlay"></div>
-
-<!-- SIDEBAR -->
-<div class="sidebar" id="menu">
-
-<div class="sidebar-header">
-<h2>Menu</h2>
-<button class="btn secondary" id="closeMenu">
-<span class="material-icons">close</span>
-</button>
-</div>
-
-<a href="#" class="btn secondary menu-item">
-<span class="material-icons">home</span> Home
-</a>
-
-<a href="https://google.com" class="btn secondary menu-item">
-<span class="material-icons">store</span> Market
-</a>
-
-<a href="https://google.com" class="btn secondary menu-item">
-<span class="material-icons">inventory_2</span> Inventory
-</a>
-
-<a href="https://google.com" class="btn secondary menu-item">
-<span class="material-icons">bar_chart</span> Stats
-</a>
-
-<a href="https://google.com" class="btn secondary menu-item">
-<span class="material-icons">article</span> News
-</a>
-
-<a href="https://google.com" class="btn secondary menu-item">
-<span class="material-icons">post_add</span> Posts
-</a>
-
-<a href="https://google.com" class="btn secondary menu-item">
-<span class="material-icons">sports_esports</span> Play
-</a>
-
-<a href="https://google.com" class="btn secondary menu-item">
-<span class="material-icons">chat</span> Chat
-</a>
-
-<a href="https://google.com" class="btn secondary menu-item">
-<span class="material-icons">settings</span> Settings
-</a>
-
-<a href="https://google.com" class="btn secondary menu-item">
-<span class="material-icons">swap_horiz</span> Trading
-</a>
-
-<button id="logoutBtn" class="btn primary menu-item">
-<span class="material-icons">logout</span> Logout
-</button>
-
-</div>
-
-<!-- NAVBAR -->
 <nav class="navbar">
-<div class="logo">Scratchlet</div>
-
-<button class="btn secondary" id="menuBtn">
-<span class="material-icons">menu</span>
-
-</button>
+  <div class="logo">Scratchlet</div>
+  <div class="minibar">
+    <a href="#" class="btn secondary minibar-btn" data-tooltip="Home"><span class="material-icons">home</span></a>
+    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Market"><span class="material-icons">store</span></a>
+    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Inventory"><span class="material-icons">inventory_2</span></a>
+    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Stats"><span class="material-icons">bar_chart</span></a>
+    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="News"><span class="material-icons">article</span></a>
+    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Posts"><span class="material-icons">post_add</span></a>
+    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Play"><span class="material-icons">sports_esports</span></a>
+    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Chat"><span class="material-icons">chat</span></a>
+    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Settings"><span class="material-icons">settings</span></a>
+    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Trading"><span class="material-icons">swap_horiz</span></a>
+    <button id="logoutBtn" class="btn primary minibar-btn" data-tooltip="Logout"><span class="material-icons">logout</span></button>
+  </div>
 </nav>
 
 <div class="container">
-
-<div class="grid">
-
-<div class="card">
-<h2>Latest News</h2>
-<p><strong>Version 1</strong></p>
-<p>This is the relased version 1, this is still being fixed and built every day so expect glitches and changes
-have fun!</p>
-</div>
-
-<div class="card">
-<h2>Recent Posts</h2>
-<p>testing posts</p>
-</div>
-
-</div>
-
-<div class="card">
-<h2>Play Now</h2>
-<a class="btn primary" href="https://google.com">PLAY NOW</a>
-</div>
-
-<div class="card">
-<h2>Recent Trades</h2>
-<p>No trades.</p>
-</div>
-
+  <div class="grid">
+    <div class="card"><h2>Latest News</h2><p><strong>Version 1</strong></p><p>This is the released version 1, this is still being fixed and built every day so expect glitches and changes. Have fun!</p></div>
+    <div class="card"><h2>Recent Posts</h2><p>testing posts</p></div>
+  </div>
+  <div class="card"><h2>Play Now</h2><a class="btn primary" href="https://google.com">PLAY NOW</a></div>
+  <div class="card"><h2>Recent Trades</h2><p>No trades.</p></div>
 </div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-import {
-  getAuth,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBzyszqkVPOn_Zbs0eacE1KQccYsTxul1E",
-  authDomain: "scratchlet-ss.firebaseapp.com",
-  projectId: "scratchlet-ss",
-  storageBucket: "scratchlet-ss.firebasestorage.app",
-  messagingSenderId: "265174756634",
-  appId: "1:265174756634:web:a4c40ae00434f077e090a3",
+const firebaseConfig = { 
+  apiKey: "AIzaSyBzyszqkVPOn_Zbs0eacE1KQccYsTxul1E", 
+  authDomain: "scratchlet-ss.firebaseapp.com", 
+  projectId: "scratchlet-ss", 
+  storageBucket: "scratchlet-ss.firebasestorage.app", 
+  messagingSenderId: "265174756634", 
+  appId: "1:265174756634:web:a4c40ae00434f077e090a3", 
   measurementId: "G-7B7B6VXYJX"
 };
 
@@ -303,55 +131,33 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 /* AUTH */
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    location.href = "https://scratchlet.github.io/login/";
+onAuthStateChanged(auth, (user) => { 
+  if (!user) { 
+    location.href = "https://scratchlet.github.io/login/"; 
   }
 });
 
 /* LOGOUT */
-document.getElementById("logoutBtn").onclick = async () => {
-  try {
-    await signOut(auth);
-    location.href = "https://scratchlet.github.io/login/";
-  } catch (err) {
-    console.error(err);
+document.getElementById("logoutBtn").onclick = async () => { 
+  try { 
+    await signOut(auth); 
+    location.href = "https://scratchlet.github.io/login/"; 
+  } catch (err) { 
+    console.error(err); 
   }
 };
 
-/* SIDEBAR */
-const menu = document.getElementById("menu");
-const overlay = document.getElementById("overlay");
-
-document.getElementById("menuBtn").onclick = () => {
-  menu.classList.add("open");
-  overlay.classList.add("show");
-};
-
-document.getElementById("closeMenu").onclick = closeMenu;
-overlay.onclick = closeMenu;
-
-function closeMenu() {
-  menu.classList.remove("open");
-  overlay.classList.remove("show");
-}
-
 /* BACKGROUND */
 const bg = document.querySelector(".background");
-
-for (let i = 0; i < 60; i++) {
-  const s = document.createElement("div");
-
-  s.className = "square";
-  s.style.left = Math.random() * 100 + "%";
-
-  const size = Math.random() * 25 + 10;
-  s.style.width = size + "px";
-  s.style.height = size + "px";
-
-  s.style.opacity = Math.random() * 0.6 + 0.25;
-  s.style.animationDuration = (Math.random() * 10 + 6) + "s";
-
+for (let i = 0; i < 60; i++) { 
+  const s = document.createElement("div"); 
+  s.className = "square"; 
+  s.style.left = Math.random() * 100 + "%"; 
+  const size = Math.random() * 25 + 10; 
+  s.style.width = size + "px"; 
+  s.style.height = size + "px"; 
+  s.style.opacity = Math.random() * 0.6 + 0.25; 
+  s.style.animationDuration = (Math.random() * 10 + 6) + "s"; 
   bg.appendChild(s);
 }
 </script>
