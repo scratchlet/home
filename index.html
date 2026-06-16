@@ -16,10 +16,21 @@ body{font-family:"Nunito",sans-serif;color:white;min-height:100vh;background:lin
 .background{position:fixed;inset:0;z-index:-1;overflow:hidden}.square{position:absolute;border:2px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);animation:fall linear infinite;}
 @keyframes fall{from{transform:translateY(-120px)}to{transform:translateY(120vh) rotate(360deg)}}
 
-/* NAVBAR & MINIBAR */
+/* NAVBAR */
 .navbar{height:70px;display:flex;justify-content:space-between;align-items:center;padding:0 30px;background:#ff7f11;box-shadow: inset 0 -6px rgba(0,0,0,.2);}
 .logo{font-family:"Titan One",cursive;font-size:2.5rem;flex-shrink:0;}
-.minibar{display:flex;align-items:center;gap:8px;}
+
+/* DARK CARD MINIBAR WRAPPER */
+.minibar{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:#8f3200;
+  padding:6px;
+  border-radius:16px;
+  box-shadow:inset 0 -4px rgba(0,0,0,.3), 0 4px 10px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255,255,255,0.05);
+}
 
 /* =========================   BUTTON SYSTEM ========================= */
 .btn{font-family:"Nunito",sans-serif;font-weight:900;border:none;cursor:pointer;letter-spacing:.3px;font-size:0.85rem;transition: transform .12s ease, box-shadow .12s ease;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;position:relative;}
@@ -29,19 +40,19 @@ body{font-family:"Nunito",sans-serif;color:white;min-height:100vh;background:lin
 .btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.25);}
 
 /* MINIBAR ICON BUTTONS */
-.minibar-btn{width:42px;height:42px;padding:0;border-radius:12px;box-shadow:0 4px 0 rgba(0,0,0,.25);}
+.minibar-btn{width:36px;height:36px;padding:0;border-radius:10px;box-shadow:0 3px 0 rgba(0,0,0,.25);}
 .minibar-btn:active{box-shadow:0 1px 0 rgba(0,0,0,.25);}
-.minibar-btn .material-icons{font-size:22px;}
+.minibar-btn .material-icons{font-size:20px;}
 
 /* ========================= INFO BUBBLE TOOLTIPS ========================= */
 .minibar-btn::after {
   content: attr(data-tooltip);
   position: absolute;
-  top: 55px;
+  top: 50px;
   left: 50%;
   transform: translateX(-50%) translateY(-5px) scale(0.9);
-  background: #8f3200;
-  color: #fff4d6;
+  background: #fff4d6;
+  color: #8f3200;
   padding: 6px 12px;
   border-radius: 8px;
   font-size: 0.8rem;
@@ -52,18 +63,18 @@ body{font-family:"Nunito",sans-serif;color:white;min-height:100vh;background:lin
   transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.15s ease;
   z-index: 100;
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  border: 2px solid rgba(255,255,255,0.15);
+  border: 2px solid #ff9b2f;
 }
 
 .minibar-btn::before {
   content: '';
   position: absolute;
-  top: 49px;
+  top: 44px;
   left: 50%;
   transform: translateX(-50%) translateY(-5px);
   border-width: 0 6px 6px 6px;
   border-style: solid;
-  border-color: transparent transparent #8f3200 transparent;
+  border-color: transparent transparent #fff4d6 transparent;
   opacity: 0;
   pointer-events: none;
   transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.15s ease;
