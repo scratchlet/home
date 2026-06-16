@@ -43,12 +43,8 @@
     }
 
     @keyframes fall {
-      from {
-        transform: translateY(-120px);
-      }
-      to {
-        transform: translateY(120vh) rotate(360deg);
-      }
+      from { transform: translateY(-120px); }
+      to { transform: translateY(120vh) rotate(360deg); }
     }
 
     /* ==========================================================================
@@ -99,34 +95,18 @@
       position: relative;
     }
 
-    .primary, .secondary {
+    .primary {
       padding: 10px 18px;
       border-radius: 14px;
       box-shadow: 0 6px 0 rgba(0, 0, 0, .25);
       transform: translateY(0);
-    }
-
-    .primary {
       background: white;
       color: #ff8c1a;
     }
 
-    .secondary {
-      background: rgba(255, 255, 255, .18);
-      color: white;
-      border: 2px solid rgba(255, 255, 255, .25);
-    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(0, 0, 0, .25); }
 
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 2px 0 rgba(0, 0, 0, .25);
-    }
-
-    /* Transparent Minibar Icons */
     .minibar-btn {
       width: 38px;
       height: 38px;
@@ -139,29 +119,15 @@
       transition: transform 0.15s ease, color 0.15s ease;
     }
 
-    .minibar-btn:hover {
-      transform: scale(1.15) !important;
-      color: #fff4d6;
-    }
+    .minibar-btn:hover { transform: scale(1.15) !important; color: #fff4d6; }
+    .minibar-btn:active { transform: scale(0.95) !important; }
+    .minibar-btn .material-icons { font-size: 22px; }
 
-    .minibar-btn:active {
-      transform: scale(0.95) !important;
-    }
-
-    .minibar-btn .material-icons {
-      font-size: 22px;
-    }
-
-    #logoutBtn.minibar-btn {
-      color: #ffc76a;
-    }
-
-    #logoutBtn.minibar-btn:hover {
-      color: white;
-    }
+    #logoutBtn.minibar-btn { color: #ffc76a; }
+    #logoutBtn.minibar-btn:hover { color: white; }
 
     /* ==========================================================================
-       TOOLTIPS (INFO BUBBLES)
+       TOOLTIPS
        ========================================================================== */
     .minibar-btn::after {
       content: attr(data-tooltip);
@@ -199,8 +165,7 @@
       z-index: 101;
     }
 
-    .minibar-btn:hover::after, 
-    .minibar-btn:hover::before {
+    .minibar-btn:hover::after, .minibar-btn:hover::before {
       opacity: 1;
       transform: translateX(-50%) translateY(0) scale(1);
     }
@@ -224,38 +189,90 @@
 
     .card h2 {
       font-family: "Titan One", cursive;
-      margin-bottom: 10px;
-    }
-
-    .long-card-sections {
+      margin-bottom: 15px;
       display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .card-section {
-      padding-bottom: 20px;
-      border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
-    }
-
-    .card-section:last-child {
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-
-    .play-banner {
-      display: flex;
-      justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* GRID FOR QUICK SHORTCUTS */
+    .shortcut-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1xl));
       gap: 15px;
     }
 
-    /* Custom inline override moved to clean CSS class */
-    .play-now-btn {
-      padding: 15px 35px;
-      font-size: 1.1rem;
-      border-radius: 18px;
+    .shortcut-card {
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      font-weight: 800;
+      font-size: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 6px 0 rgba(0, 0, 0, 0.15);
+      transition: transform 0.12s ease, background 0.12s ease;
+    }
+
+    .shortcut-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .shortcut-card:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+    }
+
+    .shortcut-card .material-icons {
+      font-size: 40px;
+      color: #fff4d6;
+    }
+
+    /* EDITABLE CHANGELOG STYLES */
+    .changelog-container {
+      background: rgba(0, 0, 0, 0.12);
+      padding: 15px;
+      border-radius: 12px;
+      border: 2px dashed rgba(255, 255, 255, 0.2);
+      color: #fff4d6;
+      font-family: inherit;
+      font-size: 1rem;
+      line-height: 1.6;
+      min-height: 100px;
+      outline: none;
+    }
+
+    .changelog-container:focus {
+      border-style: solid;
+      border-color: white;
+      background: rgba(0, 0, 0, 0.18);
+    }
+
+    .save-indicator {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 8px;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    /* VERSION INFO PILL */
+    .version-tag {
+      background: #8f3200;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: "Nunito", sans-serif;
+      font-weight: 900;
+      color: #ffc76a;
+      box-shadow: inset 0 -2px rgba(0,0,0,0.3);
     }
   </style>
 </head>
@@ -281,33 +298,39 @@
   <div class="container">
     
     <div class="card">
-      <div class="long-card-sections">
-        <div class="card-section">
-          <h2>Latest News</h2>
-          <p><strong>Version 1</strong></p>
-          <p>This is the released version 1, this is still being fixed and built every day so expect glitches and changes. Have fun!</p>
-        </div>
-        
-        <div class="card-section">
-          <h2>Recent Posts</h2>
-          <p>testing posts</p>
-        </div>
-        
-        <div class="card-section">
-          <h2>Recent Trades</h2>
-          <p>No trades.</p>
-        </div>
+      <h2>Quick Shortcuts</h2>
+      <div class="shortcut-grid">
+        <a href="https://google.com" class="shortcut-card">
+          <span class="material-icons">bar_chart</span>
+          Stats
+        </a>
+        <a href="https://google.com" class="shortcut-card">
+          <span class="material-icons">store</span>
+          Market
+        </a>
+        <a href="https://google.com" class="shortcut-card">
+          <span class="material-icons">token</span>
+          Blooks
+        </a>
+        <a href="https://google.com" class="shortcut-card">
+          <span class="material-icons">chat</span>
+          Chat
+        </a>
       </div>
     </div>
 
     <div class="card">
-      <div class="play-banner">
-        <div>
-          <h2>Play Now</h2>
-          <p>Jump right into the action and play Scratchlet!</p>
-        </div>
-        <a class="btn primary play-now-btn" href="https://google.com">PLAY NOW</a>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+        <h2 style="margin-bottom: 0;">Changelogs</h2>
+        <span class="version-tag">v1.0.0-Beta</span>
       </div>
+      
+      <div class="changelog-container" contenteditable="true" id="changelogBox">
+• Added Quick Shortcuts system for seamless exploration.<br>
+• Cleaned UI architecture and separated modules.<br>
+• Ongoing live database optimizations and bug troubleshooting.
+      </div>
+      <div class="save-indicator">✏️ Click inside the text block above to modify changes live</div>
     </div>
 
   </div>
@@ -345,6 +368,15 @@
         console.error(err);
       }
     };
+
+    /* OPTIONAL LocalStorage backup to preserve edits made to changelog */
+    const changelogBox = document.getElementById('changelogBox');
+    if(localStorage.getItem('scratchlet_changelog')) {
+      changelogBox.innerHTML = localStorage.getItem('scratchlet_changelog');
+    }
+    changelogBox.addEventListener('input', () => {
+      localStorage.setItem('scratchlet_changelog', changelogBox.innerHTML);
+    });
 
     /* GENERATE FLOATING BACKGROUND SQUARES */
     const bg = document.querySelector(".background");
