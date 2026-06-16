@@ -24,9 +24,9 @@ body{font-family:"Nunito",sans-serif;color:white;min-height:100vh;background:lin
 .minibar{
   display:flex;
   align-items:center;
-  gap:6px;
+  gap:4px;
   background:#8f3200;
-  padding:6px;
+  padding:6px 12px;
   border-radius:16px;
   box-shadow:inset 0 -4px rgba(0,0,0,.3), 0 4px 10px rgba(0,0,0,0.15);
   border: 1px solid rgba(255,255,255,0.05);
@@ -39,16 +39,40 @@ body{font-family:"Nunito",sans-serif;color:white;min-height:100vh;background:lin
 .secondary{background:rgba(255,255,255,.18);color:white;border:2px solid rgba(255,255,255,.25);}
 .btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.25);}
 
-/* MINIBAR ICON BUTTONS */
-.minibar-btn{width:36px;height:36px;padding:0;border-radius:10px;box-shadow:0 3px 0 rgba(0,0,0,.25);}
-.minibar-btn:active{box-shadow:0 1px 0 rgba(0,0,0,.25);}
-.minibar-btn .material-icons{font-size:20px;}
+/* TRANSPARENT MINIBAR ICON BUTTONS */
+.minibar-btn{
+  width:38px;
+  height:38px;
+  padding:0;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+.minibar-btn:hover {
+  transform: scale(1.15) !important;
+  color: #fff4d6;
+}
+.minibar-btn:active {
+  transform: scale(0.95) !important;
+}
+.minibar-btn .material-icons{font-size:22px;}
+
+/* Specific style tweak for the logout button icon color */
+#logoutBtn.minibar-btn {
+  color: #ffc76a;
+}
+#logoutBtn.minibar-btn:hover {
+  color: white;
+}
 
 /* ========================= INFO BUBBLE TOOLTIPS ========================= */
 .minibar-btn::after {
   content: attr(data-tooltip);
   position: absolute;
-  top: 50px;
+  top: 48px;
   left: 50%;
   transform: translateX(-50%) translateY(-5px) scale(0.9);
   background: #fff4d6;
@@ -69,7 +93,7 @@ body{font-family:"Nunito",sans-serif;color:white;min-height:100vh;background:lin
 .minibar-btn::before {
   content: '';
   position: absolute;
-  top: 44px;
+  top: 42px;
   left: 50%;
   transform: translateX(-50%) translateY(-5px);
   border-width: 0 6px 6px 6px;
@@ -121,17 +145,17 @@ body{font-family:"Nunito",sans-serif;color:white;min-height:100vh;background:lin
 <nav class="navbar">
   <div class="logo">Scratchlet</div>
   <div class="minibar">
-    <a href="#" class="btn secondary minibar-btn" data-tooltip="Home"><span class="material-icons">home</span></a>
-    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Market"><span class="material-icons">store</span></a>
-    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Inventory"><span class="material-icons">inventory_2</span></a>
-    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Stats"><span class="material-icons">bar_chart</span></a>
-    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="News"><span class="material-icons">article</span></a>
-    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Posts"><span class="material-icons">post_add</span></a>
-    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Play"><span class="material-icons">sports_esports</span></a>
-    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Chat"><span class="material-icons">chat</span></a>
-    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Settings"><span class="material-icons">settings</span></a>
-    <a href="https://google.com" class="btn secondary minibar-btn" data-tooltip="Trading"><span class="material-icons">swap_horiz</span></a>
-    <button id="logoutBtn" class="btn primary minibar-btn" data-tooltip="Logout"><span class="material-icons">logout</span></button>
+    <a href="#" class="btn minibar-btn" data-tooltip="Home"><span class="material-icons">home</span></a>
+    <a href="https://google.com" class="btn minibar-btn" data-tooltip="Market"><span class="material-icons">store</span></a>
+    <a href="https://google.com" class="btn minibar-btn" data-tooltip="Inventory"><span class="material-icons">inventory_2</span></a>
+    <a href="https://google.com" class="btn minibar-btn" data-tooltip="Stats"><span class="material-icons">bar_chart</span></a>
+    <a href="https://google.com" class="btn minibar-btn" data-tooltip="News"><span class="material-icons">article</span></a>
+    <a href="https://google.com" class="btn minibar-btn" data-tooltip="Posts"><span class="material-icons">post_add</span></a>
+    <a href="https://google.com" class="btn minibar-btn" data-tooltip="Play"><span class="material-icons">sports_esports</span></a>
+    <a href="https://google.com" class="btn minibar-btn" data-tooltip="Chat"><span class="material-icons">chat</span></a>
+    <a href="https://google.com" class="btn minibar-btn" data-tooltip="Settings"><span class="material-icons">settings</span></a>
+    <a href="https://google.com" class="btn minibar-btn" data-tooltip="Trading"><span class="material-icons">swap_horiz</span></a>
+    <button id="logoutBtn" class="btn minibar-btn" data-tooltip="Logout"><span class="material-icons">logout</span></button>
   </div>
 </nav>
 
