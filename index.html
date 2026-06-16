@@ -7,25 +7,24 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght=0,200..1000;1,200..1000&family=Titan+One&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Titan+One&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <style>
     /* ==========================================================================
        GLOBAL STYLES & BACKGROUND
        ========================================================================== */
-    * {
+    *, *::before, *::after {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      font-family: "Nunito", sans-serif; /* Copied direct fallback injection rules */
     }
 
     body {
-      font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-weight: 600; /* Crisp mid-weight baseline for readability */
       color: white;
       min-height: 100vh;
-      background: linear-gradient(160deg, #fff4d6 0%, #ffc76a 25%, #ff9b2f 50%, #ff7f11 75%, #8f3200 100%);
+      background: linear-gradient(160deg, #fff4d6, #ffc76a 25%, #ff9b2f 50%, #ff7f11 75%, #8f3200);
       overflow-x: hidden;
     }
 
@@ -41,11 +40,12 @@
       border: 2px solid rgba(255, 255, 255, .35);
       background: rgba(255, 255, 255, .12);
       animation: fall linear infinite;
+      top: -150px;
     }
 
     @keyframes fall {
-      from { transform: translateY(-120px); }
-      to { transform: translateY(120vh) rotate(360deg); }
+      from { transform: translateY(0); }
+      to { transform: translateY(130vh) rotate(360deg); }
     }
 
     /* ==========================================================================
@@ -62,8 +62,7 @@
     }
 
     .logo {
-      font-family: "Titan One", cursive, sans-serif;
-      font-weight: 400;
+      font-family: "Titan One", cursive;
       font-size: 2.5rem;
       flex-shrink: 0;
     }
@@ -83,8 +82,7 @@
        BUTTON SYSTEM
        ========================================================================== */
     .btn {
-      font-family: "Nunito", sans-serif;
-      font-weight: 900; /* Thick bold font style for action buttons */
+      font-weight: 900;
       border: none;
       cursor: pointer;
       letter-spacing: .3px;
@@ -190,8 +188,7 @@
     }
 
     .card h2 {
-      font-family: "Titan One", cursive, sans-serif;
-      font-weight: 400;
+      font-family: "Titan One", cursive;
       margin-bottom: 15px;
       display: flex;
       align-items: center;
@@ -213,7 +210,6 @@
       text-align: center;
       text-decoration: none;
       color: white;
-      font-family: "Nunito", sans-serif;
       font-weight: 800;
       font-size: 1.2rem;
       display: flex;
@@ -246,8 +242,6 @@
       border-radius: 12px;
       border: 2px dashed rgba(255, 255, 255, 0.2);
       color: #fff4d6;
-      font-family: "Nunito", sans-serif;
-      font-weight: 600;
       font-size: 1rem;
       line-height: 1.6;
       min-height: 100px;
@@ -261,7 +255,6 @@
     }
 
     .save-indicator {
-      font-family: "Nunito", sans-serif;
       font-size: 0.85rem;
       color: rgba(255, 255, 255, 0.7);
       margin-top: 8px;
@@ -275,7 +268,6 @@
       padding: 4px 10px;
       border-radius: 8px;
       font-size: 0.9rem;
-      font-family: "Nunito", sans-serif;
       font-weight: 900;
       color: #ffc76a;
       box-shadow: inset 0 -2px rgba(0,0,0,0.3);
@@ -289,14 +281,14 @@
   <nav class="navbar">
     <div class="logo">Scratchlet</div>
     <div class="minibar">
-      <a href="#" class="btn minibar-btn" data-tooltip="Home"><span class="material-icons">home</span></a>
-      <a href="https://google.com" class="btn minibar-btn" data-tooltip="Market"><span class="material-icons">store</span></a>
-      <a href="https://google.com" class="btn minibar-btn" data-tooltip="Inventory"><span class="material-icons">inventory_2</span></a>
-      <a href="https://google.com" class="btn minibar-btn" data-tooltip="Stats"><span class="material-icons">bar_chart</span></a>
-      <a href="https://google.com" class="btn minibar-btn" data-tooltip="News"><span class="material-icons">article</span></a>
-      <a href="https://google.com" class="btn minibar-btn" data-tooltip="Chat"><span class="material-icons">chat</span></a>
-      <a href="https://google.com" class="btn minibar-btn" data-tooltip="Settings"><span class="material-icons">settings</span></a>
-      <a href="https://google.com" class="btn minibar-btn" data-tooltip="Trading"><span class="material-icons">swap_horiz</span></a>
+      <a href="https://scratchlet.github.io/login/" class="btn minibar-btn" data-tooltip="Home"><span class="material-icons">home</span></a>
+      <a href="https://scratchlet.github.io/market/" class="btn minibar-btn" data-tooltip="Market"><span class="material-icons">store</span></a>
+      <a href="https://scratchlet.github.io/inventory/" class="btn minibar-btn" data-tooltip="Inventory"><span class="material-icons">inventory_2</span></a>
+      <a href="https://scratchlet.github.io/stats/" class="btn minibar-btn" data-tooltip="Stats"><span class="material-icons">bar_chart</span></a>
+      <a href="https://scratchlet.github.io/news/" class="btn minibar-btn" data-tooltip="News"><span class="material-icons">article</span></a>
+      <a href="https://scratchlet.github.io/chat/" class="btn minibar-btn" data-tooltip="Chat"><span class="material-icons">chat</span></a>
+      <a href="https://scratchlet.github.io/settings/" class="btn minibar-btn" data-tooltip="Settings"><span class="material-icons">settings</span></a>
+      <a href="https://scratchlet.github.io/trading/" class="btn minibar-btn" data-tooltip="Trading"><span class="material-icons">swap_horiz</span></a>
       <button id="logoutBtn" class="btn minibar-btn" data-tooltip="Logout"><span class="material-icons">logout</span></button>
     </div>
   </nav>
@@ -306,19 +298,19 @@
     <div class="card">
       <h2>Quick Shortcuts</h2>
       <div class="shortcut-grid">
-        <a href="https://google.com" class="shortcut-card">
+        <a href="https://scratchlet.github.io/stats/" class="shortcut-card">
           <span class="material-icons">bar_chart</span>
           Stats
         </a>
-        <a href="https://google.com" class="shortcut-card">
+        <a href="https://scratchlet.github.io/market/" class="shortcut-card">
           <span class="material-icons">store</span>
           Market
         </a>
-        <a href="https://google.com" class="shortcut-card">
+        <a href="https://scratchlet.github.io/inventory/" class="shortcut-card">
           <span class="material-icons">token</span>
           Blooks
         </a>
-        <a href="https://google.com" class="shortcut-card">
+        <a href="https://scratchlet.github.io/chat/" class="shortcut-card">
           <span class="material-icons">chat</span>
           Chat
         </a>
