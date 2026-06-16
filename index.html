@@ -18,7 +18,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Nunito", sans-serif; /* Copied direct fallback injection rules */
+      font-family: "Nunito", sans-serif;
     }
 
     body {
@@ -26,6 +26,35 @@
       min-height: 100vh;
       background: linear-gradient(160deg, #fff4d6, #ffc76a 25%, #ff9b2f 50%, #ff7f11 75%, #8f3200);
       overflow-x: hidden;
+    }
+
+    /* PREVENT FLICKER: Main layout wrapper hidden until auth verifies */
+    #mainContent {
+      display: none;
+    }
+
+    /* LOADING SCREEN */
+    #authLoadingScreen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(160deg, #fff4d6, #ffc76a 25%, #ff9b2f 50%, #ff7f11 75%, #8f3200);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+    }
+
+    .loading-pulse {
+      font-family: "Titan One", cursive;
+      font-size: 3rem;
+      color: #8f3200;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      animation: pulseGlow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      from { transform: scale(0.95); opacity: 0.6; }
+      to { transform: scale(1.05); opacity: 1; }
     }
 
     .background {
@@ -235,7 +264,7 @@
       color: #fff4d6;
     }
 
-    /* EDITABLE CHANGELOG STYLES */
+    /* CHANGELOG CONTAINER */
     .changelog-container {
       background: rgba(0, 0, 0, 0.12);
       padding: 15px;
@@ -245,21 +274,6 @@
       font-size: 1rem;
       line-height: 1.6;
       min-height: 100px;
-      outline: none;
-    }
-
-    .changelog-container:focus {
-      border-style: solid;
-      border-color: white;
-      background: rgba(0, 0, 0, 0.18);
-    }
-
-    .save-indicator {
-      font-size: 0.85rem;
-      color: rgba(255, 255, 255, 0.7);
-      margin-top: 8px;
-      text-align: right;
-      font-weight: 700;
     }
 
     /* VERSION INFO PILL */
@@ -276,61 +290,62 @@
 </head>
 <body>
 
-  <div class="background"></div>
+  <div id="authLoadingScreen">
+    <div class="loading-pulse">Scratchlet</div>
+  </div>
 
-  <nav class="navbar">
-    <div class="logo">Scratchlet</div>
-    <div class="minibar">
-      <a href="https://scratchlet.github.io/login/" class="btn minibar-btn" data-tooltip="Home"><span class="material-icons">home</span></a>
-      <a href="https://scratchlet.github.io/market/" class="btn minibar-btn" data-tooltip="Market"><span class="material-icons">store</span></a>
-      <a href="https://scratchlet.github.io/inventory/" class="btn minibar-btn" data-tooltip="Inventory"><span class="material-icons">inventory_2</span></a>
-      <a href="https://scratchlet.github.io/stats/" class="btn minibar-btn" data-tooltip="Stats"><span class="material-icons">bar_chart</span></a>
-      <a href="https://scratchlet.github.io/news/" class="btn minibar-btn" data-tooltip="News"><span class="material-icons">article</span></a>
-      <a href="https://scratchlet.github.io/chat/" class="btn minibar-btn" data-tooltip="Chat"><span class="material-icons">chat</span></a>
-      <a href="https://scratchlet.github.io/settings/" class="btn minibar-btn" data-tooltip="Settings"><span class="material-icons">settings</span></a>
-      <a href="https://scratchlet.github.io/trading/" class="btn minibar-btn" data-tooltip="Trading"><span class="material-icons">swap_horiz</span></a>
-      <button id="logoutBtn" class="btn minibar-btn" data-tooltip="Logout"><span class="material-icons">logout</span></button>
-    </div>
-  </nav>
+  <div id="mainContent">
+    <div class="background"></div>
 
-  <div class="container">
-    
-    <div class="card">
-      <h2>Quick Shortcuts</h2>
-      <div class="shortcut-grid">
-        <a href="https://scratchlet.github.io/stats/" class="shortcut-card">
-          <span class="material-icons">bar_chart</span>
-          Stats
-        </a>
-        <a href="https://scratchlet.github.io/market/" class="shortcut-card">
-          <span class="material-icons">store</span>
-          Market
-        </a>
-        <a href="https://scratchlet.github.io/inventory/" class="shortcut-card">
-          <span class="material-icons">token</span>
-          Blooks
-        </a>
-        <a href="https://scratchlet.github.io/chat/" class="shortcut-card">
-          <span class="material-icons">chat</span>
-          Chat
-        </a>
+    <nav class="navbar">
+      <div class="logo">Scratchlet</div>
+      <div class="minibar">
+        <a href="https://scratchlet.github.io/login/" class="btn minibar-btn" data-tooltip="Home"><span class="material-icons">home</span></a>
+        <a href="https://scratchlet.github.io/market/" class="btn minibar-btn" data-tooltip="Market"><span class="material-icons">store</span></a>
+        <a href="https://scratchlet.github.io/inventory/" class="btn minibar-btn" data-tooltip="Inventory"><span class="material-icons">inventory_2</span></a>
+        <a href="https://scratchlet.github.io/stats/" class="btn minibar-btn" data-tooltip="Stats"><span class="material-icons">bar_chart</span></a>
+        <a href="https://scratchlet.github.io/news/" class="btn minibar-btn" data-tooltip="News"><span class="material-icons">article</span></a>
+        <a href="https://scratchlet.github.io/chat/" class="btn minibar-btn" data-tooltip="Chat"><span class="material-icons">chat</span></a>
+        <a href="https://scratchlet.github.io/settings/" class="btn minibar-btn" data-tooltip="Settings"><span class="material-icons">settings</span></a>
+        <a href="https://scratchlet.github.io/trading/" class="btn minibar-btn" data-tooltip="Trading"><span class="material-icons">swap_horiz</span></a>
+        <button id="logoutBtn" class="btn minibar-btn" data-tooltip="Logout"><span class="material-icons">logout</span></button>
       </div>
-    </div>
+    </nav>
 
-    <div class="card">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
-        <h2 style="margin-bottom: 0;">Changelogs</h2>
-        <span class="version-tag">v1.0.0-Beta</span>
-      </div>
+    <div class="container">
       
-      <div class="changelog-container" contenteditable="true" id="changelogBox">
-• Added Quick Shortcuts system for seamless exploration.<br>
-• Cleaned UI architecture and separated modules.<br>
-• Ongoing live database optimizations and bug troubleshooting.
+      <div class="card">
+        <h2>Quick Shortcuts</h2>
+        <div class="shortcut-grid">
+          <a href="https://scratchlet.github.io/stats/" class="shortcut-card">
+            <span class="material-icons">bar_chart</span>
+            Stats
+          </a>
+          <a href="https://scratchlet.github.io/market/" class="shortcut-card">
+            <span class="material-icons">store</span>
+            Market
+          </a>
+          <a href="https://scratchlet.github.io/inventory/" class="shortcut-card">
+            <span class="material-icons">token</span>
+            Blooks
+          </a>
+          <a href="https://scratchlet.github.io/chat/" class="shortcut-card">
+            <span class="material-icons">chat</span>
+            Chat
+          </a>
+        </div>
       </div>
-      <div class="save-indicator">✏️ Click inside the text block above to modify changes live</div>
-    </div>
 
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+          <h2 style="margin-bottom: 0;">Changelogs</h2>
+          <span class="version-tag" id="versionTag">v1.0.0-Beta</span>
+        </div>
+        
+        <div class="changelog-container" id="changelogBox"></div>
+      </div>
+
+    </div>
   </div>
 
   <script type="module">
@@ -350,10 +365,32 @@
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    /* AUTH PROTECTION */
+    /* ==========================================================================
+       EDIT CHANGELOG & VERSION VIA CODE HERE
+       ========================================================================== */
+    const currentVersion = "v1.0.0-Beta";
+    
+    const changelogData = [
+      "Added Quick Shortcuts system for seamless exploration.",
+      "Cleaned UI architecture and separated modules.",
+      "Ongoing live database optimizations and bug troubleshooting."
+    ];
+
+    document.getElementById("versionTag").innerText = currentVersion;
+    document.getElementById("changelogBox").innerHTML = changelogData
+      .map(item => `• ${item}`)
+      .join("<br>");
+
+
+    /* AUTH PROTECTION & FLICKER SOLUTION */
     onAuthStateChanged(auth, (user) => {
       if (!user) {
         location.href = "https://scratchlet.github.io/login/";
+      } else {
+        // Safe authenticated user found: remove loader screen and build the real elements
+        document.getElementById("authLoadingScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        initializeBackgroundSquares();
       }
     });
 
@@ -367,29 +404,24 @@
       }
     };
 
-    /* LocalStorage backup to preserve edits made to changelog */
-    const changelogBox = document.getElementById('changelogBox');
-    if(localStorage.getItem('scratchlet_changelog')) {
-      changelogBox.innerHTML = localStorage.getItem('scratchlet_changelog');
-    }
-    changelogBox.addEventListener('input', () => {
-      localStorage.setItem('scratchlet_changelog', changelogBox.innerHTML);
-    });
-
     /* GENERATE FLOATING BACKGROUND SQUARES */
-    const bg = document.querySelector(".background");
-    for (let i = 0; i < 60; i++) {
-      const s = document.createElement("div");
-      s.className = "square";
-      s.style.left = Math.random() * 100 + "%";
+    function initializeBackgroundSquares() {
+      const bg = document.querySelector(".background");
+      if (!bg) return;
       
-      const size = Math.random() * 25 + 10;
-      s.style.width = size + "px";
-      s.style.height = size + "px";
-      s.style.opacity = Math.random() * 0.6 + 0.25;
-      s.style.animationDuration = (Math.random() * 10 + 6) + "s";
-      
-      bg.appendChild(s);
+      for (let i = 0; i < 60; i++) {
+        const s = document.createElement("div");
+        s.className = "square";
+        s.style.left = Math.random() * 100 + "%";
+        
+        const size = Math.random() * 25 + 10;
+        s.style.width = size + "px";
+        s.style.height = size + "px";
+        s.style.opacity = Math.random() * 0.6 + 0.25;
+        s.style.animationDuration = (Math.random() * 10 + 6) + "s";
+        
+        bg.appendChild(s);
+      }
     }
   </script>
 </body>
